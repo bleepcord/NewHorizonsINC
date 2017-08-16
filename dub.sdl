@@ -1,0 +1,5 @@
+name "horizon_inc"
+description "A text based sci-fi game with RPG elements."
+authors "Nicholas Rotella"
+copyright "Copyright © 2017, Nicholas Rotella"
+license "BSD"
