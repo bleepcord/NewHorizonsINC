@@ -1,4 +1,5 @@
-abstract class Entity {
+abstract class Entity
+{
 private:
     int health;
     int strength;
@@ -6,7 +7,6 @@ private:
     int dexterity;
     bool alive = true;
 protected:
-public:
     this(int health, int strength, int constitution, int dexterity)
     {
         this.health = health;
@@ -14,6 +14,7 @@ public:
         this.constitution = constitution;
         this.dexterity = dexterity;
     }
+public:
     int getHealth() { return this.health; }
     int getStrength() { return this.strength; }
     int getConstitution() { return this.constitution; }

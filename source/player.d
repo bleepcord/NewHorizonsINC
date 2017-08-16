@@ -1,6 +1,7 @@
 import entity;
 
-class Player : Entity {
+class Player : Entity
+{
 private:
     int health = 100;
     int strength = 20;
