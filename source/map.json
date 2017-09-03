@@ -1,0 +1,14 @@
+{
+"Main Hall" :
+  { "north" : "Hallway to Labs",
+    "east"  : "East Barracks",
+    "west"  : "West Barracks",
+    "south" :  null
+  },
+"Hallway to Labs" :
+  { "north" : null,
+    "east"  : "Lab 2",
+    "west"  : "Lab 1",
+    "south" : "Main Hall" 
+  }
+}
