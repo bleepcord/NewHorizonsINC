@@ -1,14 +1,80 @@
 {
 "Main Hall" :
-  { "north" : "Hallway to Labs",
+  { "north" : "Hallway to Labs 1 and 2",
     "east"  : "East Barracks",
     "west"  : "West Barracks",
-    "south" :  null
+    "south" :  "noroom"
   },
-"Hallway to Labs" :
-  { "north" : null,
+"Hallway to Labs 1 and 2" :
+  { "north" : "Hallway to Labs 3 and 4",
     "east"  : "Lab 2",
     "west"  : "Lab 1",
     "south" : "Main Hall" 
+  },
+"Hallway to Labs 3 and 4" :
+  { "north" : "Hallway to Labs 5 and 6",
+    "east"  : "Lab 4",
+    "west"  : "Lab 3",
+    "south" : "Main Hall" 
+  },
+"Hallway to Labs 5 and 6" :
+  { "north" : "Hallway to Labs 7 and 8",
+    "east"  : "Lab 6",
+    "west"  : "Lab 5",
+    "south" : "Main Hall" 
+  },
+"Hallway to Labs 7 and 8" :
+  { "north" : "noroom",
+    "east"  : "Lab 8",
+    "west"  : "Lab 7",
+    "south" : "Main Hall" 
+  },
+"Lab 1" :
+  { "north" : "noroom",
+    "east"  : "Hallway to Labs 1 and 2",
+    "west"  : "noroom",
+    "south" : "noroom" 
+  },
+"Lab 2" :
+  { "north" : "noroom",
+    "east"  : "noroom",
+    "west"  : "Hallway to Labs 1 and 2",
+    "south" : "noroom" 
+  },
+"Lab 3" :
+  { "north" : "noroom",
+    "east"  : "Hallway to Labs 3 and 4",
+    "west"  : "noroom",
+    "south" : "noroom" 
+  },
+"Lab 4" :
+  { "north" : "noroom",
+    "east"  : "noroom",
+    "west"  : "Hallway to Labs 3 and 4",
+    "south" : "noroom" 
+  },
+"Lab 5" :
+  { "north" : "noroom",
+    "east"  : "Hallway to Labs 5 and 6",
+    "west"  : "noroom",
+    "south" : "noroom" 
+  },
+"Lab 6" :
+  { "north" : "noroom",
+    "east"  : "noroom",
+    "west"  : "Hallway to Labs 5 and 6",
+    "south" : "noroom" 
+  },
+"Lab 7" :
+  { "north" : "noroom",
+    "east"  : "Hallway to Labs 7 and 8",
+    "west"  : "noroom",
+    "south" : "noroom" 
+  },
+"Lab 8" :
+  { "north" : "noroom",
+    "east"  : "noroom",
+    "west"  : "Hallway to Labs 7 and 8",
+    "south" : "noroom" 
   }
 }

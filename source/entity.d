@@ -132,6 +132,12 @@ public:
         string mapContent = readText("source/map.json");
         JSONValue map = parseJSON(mapContent);
 
+        /* If there is no room in that direction, report back to player and do nothing. */
+        if (map[this.currentLocation.getName()][direction].str == "noroom") {
+            writeln("There is nothing in that direction.");
+            return;
+        }
+
         /* If the adjacent room has not been created yet, create it. */
         if (this.currentLocation.getAdjacent(direction) is null) {
             Room nextLocation = new Room(map[this.currentLocation.getName()][direction].str);
