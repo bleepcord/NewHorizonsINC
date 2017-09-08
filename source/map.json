@@ -5,6 +5,18 @@
     "west"  : "West Barracks",
     "south" :  "noroom"
   },
+"East Barracks" :
+  { "north" : "noroom",
+    "east"  : "noroom",
+    "west"  : "Main Hall",
+    "south" :  "noroom"
+  },
+"West Barracks" :
+  { "north" : "noroom",
+    "east"  : "Main Hall",
+    "west"  : "noroom",
+    "south" :  "noroom"
+  },
 "Hallway to Labs 1 and 2" :
   { "north" : "Hallway to Labs 3 and 4",
     "east"  : "Lab 2",
