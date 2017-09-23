@@ -67,6 +67,7 @@ public:
     int getDexterity() { return this.dexterity; }
     Weapon getEquippedWeapon() { return this.equippedWeapon; }
     bool isAlive() { return this.alive; }
+    Room getLocation() { return this.currentLocation; }
 
     void addWeapon(Weapon newWeapon) {
         weapons.stableInsert(newWeapon);
@@ -86,6 +87,12 @@ public:
                 writeln("There does not appear to be a ", weaponName,
                         " in your inventory.");
             }
+        }
+    }
+
+    void printInventory() {
+        foreach (weapon; weapons) {
+            writeln(weapon.getName());
         }
     }
 
@@ -128,27 +135,29 @@ public:
      * Move entity.
      */
     void move(string direction) {
-        /* Load and parse json file containing map spec. */
-        string mapContent = readText("source/map.json");
-        JSONValue map = parseJSON(mapContent);
 
-        /* If there is no room in that direction, report back to player and do nothing. */
-        if (map[this.currentLocation.getName()][direction].str == "noroom") {
-            writeln("There is nothing in that direction.");
-            return;
-        }
-
-        /* If the adjacent room has not been created yet, create it. */
+        /* If adjacent room does not exist already, create it. */
         if (this.currentLocation.getAdjacent(direction) is null) {
-            Room nextLocation = new Room(map[this.currentLocation.getName()][direction].str);
+            string mapContent = readText("source/map.json");
+            JSONValue map = parseJSON(mapContent);
+
+            /* If there is no room in that direction, report back to player and do nothing. */
+            if (map[this.currentLocation.getName()][direction].str == "noroom") {
+                writeln("There is nothing in that direction.");
+                return;
+            }
+
+            /*
+             * Prefetch new room name and use to fetch new room description from map.json.
+             * then create new room and set adjacent.
+             */
+            string newRoomName = map[this.currentLocation.getName()][direction].str;
+            string newRoomDescription = map[newRoomName]["description"].str;
+            Room nextLocation = new Room(newRoomName, newRoomDescription);
             this.currentLocation.setAdjacent(nextLocation, direction);
         }
 
         /* Set currentLocation to proper adjacent room. */
         this.currentLocation = this.currentLocation.getAdjacent(direction);
-    }
-
-    string getLocation() {
-        return this.currentLocation.getName();
     }
 }
