@@ -46,9 +46,8 @@ void main()
     writeln("Dexterity: ",    player.getDexterity());
     writeln();
 
-
-
-    /* Commands are issued with three levels from stdin.
+    /*
+     * Commands are issued with three levels from stdin.
      * levelOne is a basic action (e.g. move, attack, equip)
      * levelTwo is an instruction for levelOne (e.g. north, rebel, pistol)
      * levelThree is a modifier for levelOne (e.g. carefully, hastely)
