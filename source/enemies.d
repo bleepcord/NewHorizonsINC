@@ -1,3 +1,5 @@
+import std.random : uniform;
+
 import entity;
 
 /*
@@ -6,7 +8,8 @@ import entity;
 abstract class Enemy : Entity
 {
 protected:
-    /* distanceInRoom to simulate location in a specific room.
+    /*
+     * distanceInRoom to simulate location in a specific room.
      * main player always assumed to enter at the door, enemies
      * distanceInRoom var represents number of turns player has
      * before enemy reaches them. (can be adjustd with dexterity)
@@ -20,6 +23,9 @@ protected:
         this.unitSizeLow = unitSizeLow;
         this.unitSizeHigh = unitSizeHigh;
     }
+public:
+    override int getUnitSizeHigh() { return this.unitSizeHigh; }
+    override int getUnitSizeLow() { return this.unitSizeLow; }
 }
 
 /*
@@ -73,5 +79,45 @@ public:
     this()
     {
         super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh);
+    }
+}
+
+class UnitBuilder
+{
+private:
+    Entity rebelBase = new Rebel();
+    Entity infectedBase = new Infected();
+    Entity xenosBase = new Xenos();
+    enum enemyType { REBEL, INFECTED, XENOS }
+public:
+    Entity[] buildUnit(int enemyTypeToBuild) {
+        int randomUnitSize;
+        Entity[] returnUnit;
+        switch(enemyTypeToBuild) {
+        case this.enemyType.REBEL:
+            randomUnitSize = uniform(rebelBase.getUnitSizeLow(), rebelBase.getUnitSizeHigh());
+            returnUnit = new Entity[randomUnitSize];
+            for (int i = 0; i < randomUnitSize; i++) {
+                returnUnit[i] = new Rebel();
+            }
+            break;
+        case this.enemyType.INFECTED:
+            randomUnitSize = uniform(infectedBase.getUnitSizeLow(), infectedBase.getUnitSizeHigh());
+            returnUnit = new Entity[randomUnitSize];
+            for (int i = 0; i < randomUnitSize; i++) {
+                returnUnit[i] = new Infected();
+            }
+            break;
+        case this.enemyType.XENOS:
+            randomUnitSize = uniform(xenosBase.getUnitSizeLow(), xenosBase.getUnitSizeHigh());
+            returnUnit = new Entity[randomUnitSize];
+            for (int i = 0; i < randomUnitSize; i++) {
+                returnUnit[i] = new Xenos();
+            }
+            break;
+        default:
+            return null;
+        }
+    return returnUnit;
     }
 }

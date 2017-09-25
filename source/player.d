@@ -39,7 +39,7 @@ public:
 
         /* initialize player object as entity, apply default weapon and location. */
         super(name, health, strength, constitution, dexterity);
-        super.setLocation(new Room("Main Hall", "Welcome to New Horizons INC"));
+        super.setLocation(new Room("Main Hall"));
         super.addWeapon(new Pistol());
     }
 }
