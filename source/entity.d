@@ -2,7 +2,7 @@ import std.stdio : writeln;
 import std.container : SList;
 import std.random : uniform;
 import std.json;
-import std.file: readText;
+import std.file : readText;
 
 import weapons;
 import rooms;
@@ -147,13 +147,7 @@ public:
                 return;
             }
 
-            /*
-             * Prefetch new room name and use to fetch new room description from map.json.
-             * then create new room and set adjacent.
-             */
-            string newRoomName = map[this.currentLocation.getName()][direction].str;
-            string newRoomDescription = map[newRoomName]["description"].str;
-            Room nextLocation = new Room(newRoomName, newRoomDescription);
+            Room nextLocation = new Room(map[this.currentLocation.getName()][direction].str);
             this.currentLocation.setAdjacent(nextLocation, direction);
         }
 

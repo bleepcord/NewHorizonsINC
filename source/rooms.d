@@ -1,6 +1,9 @@
 import std.stdio;
 import std.container : SList;
 import std.json;
+import std.file : readText;
+import std.conv : to;
+import std.random : uniform;
 
 import entity;
 
@@ -13,15 +16,15 @@ private:
     Room west;
     Room south;
     string description;
-    int size;
+    long size;
+    long rebelSpawnChance;
+    long infectedSpawnChance;
+    long xenosSpawnChance;
     /*
      * TODO: Populate each room based on probablity of specific entity
      *       existing in the room.
      */
     auto enemies = SList!Entity();
-
-    void spawnEnemies() {
-    }
 
     /*
      * Set enemy locations based on the size of the room. Randomize distances.
@@ -31,14 +34,21 @@ private:
     void setEnemyLocations(){
     }
 public:
-    this(string name, string description)
+    this(string name)
     {
+        string mapContent = readText("source/map.json");
+        JSONValue map = parseJSON(mapContent);
+
         this.name = name;
         this.north = null;
         this.east = null;
         this.west = null;
         this.south = null;
-        this.description = description;
+        this.description = map[this.name]["description"].str;
+        this.size = map[this.name]["size"].integer;
+        this.rebelSpawnChance = map[this.name]["rebelSpawnChance"].integer;
+        this.infectedSpawnChance = map[this.name]["infectedSpawnChance"].integer;
+        this.xenosSpawnChance = map[this.name]["xenosSpawnChance"].integer;
     }
 
     string getName() {
@@ -97,5 +107,9 @@ public:
      */
     string observeAdjacentRooms() {
         return "test";
+    }
+
+    void spawnEnemies() {
+        
     }
 }
