@@ -55,6 +55,7 @@ protected:
         this.constitution = constitution;
         this.dexterity = dexterity;
     }
+
 public:
     /*
      * Self expanatory accessors and mutators.
@@ -68,6 +69,8 @@ public:
     Weapon getEquippedWeapon() { return this.equippedWeapon; }
     bool isAlive() { return this.alive; }
     Room getLocation() { return this.currentLocation; }
+    int getUnitSizeHigh() { return 0; }
+    int getUnitSizeLow() { return 0; }
 
     void addWeapon(Weapon newWeapon) {
         weapons.stableInsert(newWeapon);

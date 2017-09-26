@@ -4,27 +4,52 @@ import std.json;
 import std.file : readText;
 import std.conv : to;
 import std.random : uniform;
+import std.algorithm : each;
 
 import entity;
+import enemies;
 
 class Room
 {
 private:
     string name;
-    Room north;
-    Room east;
-    Room west;
-    Room south;
+    Room north, east, west, south;
     string description;
     long size;
-    long rebelSpawnChance;
-    long infectedSpawnChance;
-    long xenosSpawnChance;
+    long rebelSpawnChance, infectedSpawnChance, xenosSpawnChance;
     /*
      * TODO: Populate each room based on probablity of specific entity
      *       existing in the room.
      */
     auto enemies = SList!Entity();
+
+    void spawnEnemies() {
+        /* boolean vals of whether to spawn unit or not. Randomize these as
+         * successes or failures based on the spawn chance of each enemy type for
+         * the room. Then build if necessary.
+         */
+        enum enemyType { REBEL, INFECTED, XENOS }
+        bool[3] spawns = false;
+        UnitBuilder unitBuilder = new UnitBuilder();
+
+        // TODO: I hate this and would like to change it
+        if (uniform(0, 101) < rebelSpawnChance) {
+            spawns[enemyType.REBEL] = true;
+        }
+        if (uniform(0, 101) < infectedSpawnChance) {
+            spawns[enemyType.INFECTED] = true;
+        }
+        if (uniform(0, 101) < xenosSpawnChance) {
+            spawns[enemyType.XENOS] = true;
+        }
+
+        /* Appears to work properly */
+        for (int i = 0; i < spawns.length; i++) {
+            if (spawns[i] is true) {
+                enemies.stableInsert(unitBuilder.buildUnit(i));
+            }
+        }
+    }
 
     /*
      * Set enemy locations based on the size of the room. Randomize distances.
@@ -49,6 +74,10 @@ public:
         this.rebelSpawnChance = map[this.name]["rebelSpawnChance"].integer;
         this.infectedSpawnChance = map[this.name]["infectedSpawnChance"].integer;
         this.xenosSpawnChance = map[this.name]["xenosSpawnChance"].integer;
+        if (name == "Main Hall") {
+            return;
+        }
+        this.spawnEnemies();
     }
 
     string getName() {
@@ -57,6 +86,12 @@ public:
 
     string getDescription() {
         return this.description;
+    }
+
+    void listEnemies() {
+        foreach (enemy; enemies) {
+            writeln(enemy.getName());
+        }
     }
 
     void setAdjacent (Room adjacentRoom, string direction)
@@ -101,15 +136,10 @@ public:
     }
 
     /*
-     * Differs from getAdjacent function.
      * Allows player to look around and see adjacent rooms.
      * TODO: implement
      */
     string observeAdjacentRooms() {
         return "test";
-    }
-
-    void spawnEnemies() {
-        
     }
 }

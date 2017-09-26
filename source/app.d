@@ -80,6 +80,7 @@ void main()
             player.move(levelTwo);
             writeln("Location: ", player.getLocation().getName(), "\n",
                     player.getLocation().getDescription());
+            player.getLocation().listEnemies();
             break;
         case "equip":
             levelTwo = command.split[1];
