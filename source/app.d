@@ -1,6 +1,7 @@
 import std.stdio;
 import std.string;
 import std.array;
+import std.algorithm.comparison : cmp;
 
 import entity;
 import player;
@@ -61,11 +62,13 @@ void main()
         writeln();
         write("Action: ");
         command = stdin.readln();
+        /* repeat last command */
+        if (cmp(command.strip(), "!!") == 0) {
+            command = lastCommand;
+        }
+
         levelOne = command.split[0];
         switch(levelOne) {
-        case "!!": // this must be at the top for the fallthrough to work properly
-            levelOne = lastCommand;
-            goto case;
         case "help":
             write("Valid commands: command {required modifier} [optional modifier]\n",
                     "move {direction} [\"carefully\",\"hastely\"]\n",
