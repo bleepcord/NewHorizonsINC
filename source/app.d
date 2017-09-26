@@ -64,7 +64,7 @@ void main()
         levelOne = command.split[0];
         switch(levelOne) {
         case "!!": // this must be at the top for the fallthrough to work properly
-            command = lastCommand;
+            levelOne = lastCommand;
             goto case;
         case "help":
             write("Valid commands: command {required modifier} [optional modifier]\n",
@@ -89,6 +89,9 @@ void main()
             break;
         case "inventory":
             player.printInventory();
+            break;
+        case "observe":
+            player.getLocation().observeAdjacentRooms();
             break;
         case "quit":
             writeln("Thanks for playing.");

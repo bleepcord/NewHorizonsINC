@@ -3,7 +3,7 @@
   { "north"               : "Hallway to Labs 1 and 2",
     "east"                : "East Barracks",
     "west"                : "West Barracks",
-    "south"               :  "noroom",
+    "south"               :  "nothing",
     "description"         : "The entry hallway to New Horizon's Inc.",
     "size"                : 1,
     "rebelSpawnChance"    : 0,
@@ -11,10 +11,10 @@
     "xenosSpawnChance"    : 0
   },
 "East Barracks" :
-  { "north"               : "noroom",
-    "east"                : "noroom",
+  { "north"               : "nothing",
+    "east"                : "nothing",
     "west"                : "Main Hall",
-    "south"               :  "noroom",
+    "south"               :  "nothing",
     "description"         : "Eastern Barracks for security personel.",
     "size"                : 5,
     "rebelSpawnChance"    : 75,
@@ -22,9 +22,9 @@
     "xenosSpawnChance"    : 5
   },
 "East Barracks Northern Hall" :
-  { "north"               : "noroom",
-    "east"                : "noroom",
-    "west"                : "noroom",
+  { "north"               : "nothing",
+    "east"                : "nothing",
+    "west"                : "nothing",
     "south"               :  "East Barracks",
     "description"         : "Long hallway facing north, there are more security personel rooms here.",
     "size"                : 3,
@@ -33,10 +33,10 @@
     "xenosSpawnChance"    : 1
   },
 "West Barracks" :
-  { "north"               : "noroom",
+  { "north"               : "nothing",
     "east"                : "Main Hall",
-    "west"                : "noroom",
-    "south"               :  "noroom",
+    "west"                : "nothing",
+    "south"               :  "nothing",
     "description"         : "Western Barracks for security personel.",
     "size"                : 5,
     "rebelSpawnChance"    : 75,
@@ -44,9 +44,9 @@
     "xenosSpawnChance"    : 5
   },
 "West Barracks Northern Hall" :
-  { "north"               : "noroom",
-    "east"                : "noroom",
-    "west"                : "noroom",
+  { "north"               : "nothing",
+    "east"                : "nothing",
+    "west"                : "nothing",
     "south"               :  "West Barracks",
     "description"         : "Long hallway facing north, there are more security personel rooms here.",
     "size"                : 3,
@@ -88,7 +88,7 @@
     "xenosSpawnChance"    : 5
   },
 "Hallway to Labs 7 and 8" :
-  { "north"               : "noroom",
+  { "north"               : "nothing",
     "east"                : "Lab 8",
     "west"                : "Lab 7",
     "south"               : "Main Hall",
@@ -99,10 +99,10 @@
     "xenosSpawnChance"    : 5
   },
 "Lab 1" :
-  { "north"               : "noroom",
+  { "north"               : "nothing",
     "east"                : "Hallway to Labs 1 and 2",
-    "west"                : "noroom",
-    "south"               : "noroom", 
+    "west"                : "nothing",
+    "south"               : "nothing", 
     "description"         : "Research Lab #1, the room is scattered with broken research equipment.",
     "size"                : 2,
     "rebelSpawnChance"    : 1,
@@ -110,10 +110,10 @@
     "xenosSpawnChance"    : 5
   },
 "Lab 2" :
-  { "north"               : "noroom",
-    "east"                : "noroom",
+  { "north"               : "nothing",
+    "east"                : "nothing",
     "west"                : "Hallway to Labs 1 and 2",
-    "south"               : "noroom", 
+    "south"               : "nothing", 
     "description"         : "Research Lab #2, the wall is lined with xray results and inspirational pictures of cats.",
     "size"                : 2,
     "rebelSpawnChance"    : 1,
@@ -121,10 +121,10 @@
     "xenosSpawnChance"    : 5
   },
 "Lab 3" :
-  { "north"               : "noroom",
+  { "north"               : "nothing",
     "east"                : "Hallway to Labs 3 and 4",
-    "west"                : "noroom",
-    "south"               : "noroom", 
+    "west"                : "nothing",
+    "south"               : "nothing", 
     "description"         : "Research Lab #3, the bodies of two researchers sit in the corner.",
     "size"                : 2,
     "rebelSpawnChance"    : 1,
@@ -132,10 +132,10 @@
     "xenosSpawnChance"    : 5
   },
 "Lab 4" :
-  { "north"               : "noroom",
-    "east"                : "noroom",
+  { "north"               : "nothing",
+    "east"                : "nothing",
     "west"                : "Hallway to Labs 3 and 4",
-    "south"               : "noroom",
+    "south"               : "nothing",
     "description"         : "Research Lab #4, this lab is filled with empty glass chambers.",
     "size"                : 2,
     "rebelSpawnChance"    : 1,
@@ -143,10 +143,10 @@
     "xenosSpawnChance"    : 5
   },
 "Lab 5" :
-  { "north"               : "noroom",
+  { "north"               : "nothing",
     "east"                : "Hallway to Labs 5 and 6",
-    "west"                : "noroom",
-    "south"               : "noroom", 
+    "west"                : "nothing",
+    "south"               : "nothing", 
     "description"         : "Research Lab #5, broken computer terminals line the walls. A giant Richard Stallman poster is on the wall to the west.",
     "size"                : 2,
     "rebelSpawnChance"    : 1,
@@ -154,10 +154,10 @@
     "xenosSpawnChance"    : 5
   },
 "Lab 6" :
-  { "north"               : "noroom",
-    "east"                : "noroom",
+  { "north"               : "nothing",
+    "east"                : "nothing",
     "west"                : "Hallway to Labs 5 and 6",
-    "south"               : "noroom", 
+    "south"               : "nothing",
     "description"         : "Research Lab #6, this room is covered wall-to-wall with a sticky green substance...",
     "size"                : 2,
     "rebelSpawnChance"    : 1,
@@ -165,10 +165,10 @@
     "xenosSpawnChance"    : 5
   },
 "Lab 7" :
-  { "north"               : "noroom",
+  { "north"               : "nothing",
     "east"                : "Hallway to Labs 7 and 8",
-    "west"                : "noroom",
-    "south"               : "noroom", 
+    "west"                : "nothing",
+    "south"               : "nothing",
     "description"         : "Research Lab #7, this room smells kinda funny...",
     "size"                : 2,
     "rebelSpawnChance"    : 1,
@@ -176,10 +176,10 @@
     "xenosSpawnChance"    : 5
   },
 "Lab 8" :
-  { "north"               : "noroom",
-    "east"                : "noroom",
+  { "north"               : "nothing",
+    "east"                : "nothing",
     "west"                : "Hallway to Labs 7 and 8",
-    "south"               : "noroom",
+    "south"               : "nothing",
     "description"         : "Research Lab #8, did they need 8 research labs?",
     "size"                : 2,
     "rebelSpawnChance"    : 1,

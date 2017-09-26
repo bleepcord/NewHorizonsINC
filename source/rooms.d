@@ -137,9 +137,15 @@ public:
 
     /*
      * Allows player to look around and see adjacent rooms.
-     * TODO: implement
      */
-    string observeAdjacentRooms() {
-        return "test";
+    void observeAdjacentRooms() {
+        string mapContent = readText("source/map.json");
+        JSONValue map = parseJSON(mapContent);
+
+        writeln("North: ", map[this.name]["north"],
+                "\nEast: ", map[this.name]["east"],
+                "\nWest: ", map[this.name]["west"],
+                "\nSouth: ", map[this.name]["south"]);
+
     }
 }

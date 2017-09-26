@@ -145,7 +145,7 @@ public:
             JSONValue map = parseJSON(mapContent);
 
             /* If there is no room in that direction, report back to player and do nothing. */
-            if (map[this.currentLocation.getName()][direction].str == "noroom") {
+            if (map[this.currentLocation.getName()][direction].str == "nothing") {
                 writeln("There is nothing in that direction.");
                 return;
             }
