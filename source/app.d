@@ -22,7 +22,7 @@ void main()
     /* Read input to set proper playerClass */
     do {
         command = stdin.readln();
-        playerClass = command.split[0];
+        playerClass = command.split[0].toLower();
         switch(playerClass) {
         case "rogue":
             validInput = true;
