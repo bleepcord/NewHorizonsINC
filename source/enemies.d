@@ -51,7 +51,7 @@ public:
 class Infected : Enemy
 {
 private:
-    string name = "rebel";
+    string name = "infected";
     int health = 200;
     int strength = 30;
     int constitution = 30;
@@ -68,7 +68,7 @@ public:
 class Xenos : Enemy
 {
 private:
-    string name = "rebel";
+    string name = "xenos";
     int health = 300;
     int strength = 50;
     int constitution = 50;
