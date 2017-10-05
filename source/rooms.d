@@ -2,9 +2,10 @@ import std.stdio;
 import std.container : SList;
 import std.json;
 import std.file : readText;
-import std.conv : to;
+import std.conv : to, parse;
 import std.random : uniform;
 import std.algorithm : each;
+import std.string : split, strip;
 
 import entity;
 import enemies;
@@ -90,7 +91,7 @@ public:
 
     void listEnemies() {
         foreach (enemy; enemies) {
-            writeln(enemy.getName());
+            writeln(enemy.getName(), " ", enemy.getMemberIndex());
         }
     }
 
@@ -147,5 +148,22 @@ public:
                 "\nWest: ", map[this.name]["west"],
                 "\nSouth: ", map[this.name]["south"]);
 
+    }
+
+    /* Returns a specific enemy from a room
+     * based on input string of the enemy name and index number
+     * Returns null if no enemy found.
+     */
+    Entity getEnemy(string enemyName, string enemyRefStr) {
+        Entity returnEntity = null;
+        int enemyRef = parse!int(enemyRefStr);
+        foreach(option; enemies) {
+            if (option.getName().strip == enemyName.strip) {
+                if (option.getMemberIndex() == enemyRef) {
+                    returnEntity = option;
+                }
+            }
+        }
+        return returnEntity;
     }
 }

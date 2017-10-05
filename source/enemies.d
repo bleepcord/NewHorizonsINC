@@ -17,15 +17,18 @@ protected:
     int distanceInRoom;
     int unitSizeLow;
     int unitSizeHigh;
-    this(string name, int health, int strength, int constitution, int dexterity, int unitSizeLow, int unitSizeHigh)
+    int index;
+    this(string name, int health, int strength, int constitution, int dexterity, int unitSizeLow, int unitSizeHigh, int index)
     {
         super(name, health, strength, constitution, dexterity);
         this.unitSizeLow = unitSizeLow;
         this.unitSizeHigh = unitSizeHigh;
+        this.index = index;
     }
 public:
     override int getUnitSizeHigh() { return this.unitSizeHigh; }
     override int getUnitSizeLow() { return this.unitSizeLow; }
+    override int getMemberIndex() { return this.index; }
 }
 
 /*
@@ -42,9 +45,9 @@ private:
     int unitSizeLow = 1;
     int unitSizeHigh = 5;
 public:
-    this()
+    this(int index)
     {
-        super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh);
+        super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh, index);
     }
 }
 
@@ -59,9 +62,9 @@ private:
     int unitSizeLow = 1;
     int unitSizeHigh = 10;
 public:
-    this()
+    this(int index)
     {
-        super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh);
+        super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh, index);
     }
 }
 
@@ -76,18 +79,18 @@ private:
     int unitSizeLow = 1;
     int unitSizeHigh = 2;
 public:
-    this()
+    this(int index)
     {
-        super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh);
+        super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh, index);
     }
 }
 
 class UnitBuilder
 {
 private:
-    Entity rebelBase = new Rebel();
-    Entity infectedBase = new Infected();
-    Entity xenosBase = new Xenos();
+    Entity rebelBase = new Rebel(0);
+    Entity infectedBase = new Infected(0);
+    Entity xenosBase = new Xenos(0);
     enum enemyType { REBEL, INFECTED, XENOS }
 public:
     Entity[] buildUnit(int enemyTypeToBuild) {
@@ -98,21 +101,21 @@ public:
             randomUnitSize = uniform(rebelBase.getUnitSizeLow(), rebelBase.getUnitSizeHigh());
             returnUnit = new Entity[randomUnitSize];
             for (int i = 0; i < randomUnitSize; i++) {
-                returnUnit[i] = new Rebel();
+                returnUnit[i] = new Rebel(i);
             }
             break;
         case this.enemyType.INFECTED:
             randomUnitSize = uniform(infectedBase.getUnitSizeLow(), infectedBase.getUnitSizeHigh());
             returnUnit = new Entity[randomUnitSize];
             for (int i = 0; i < randomUnitSize; i++) {
-                returnUnit[i] = new Infected();
+                returnUnit[i] = new Infected(i);
             }
             break;
         case this.enemyType.XENOS:
             randomUnitSize = uniform(xenosBase.getUnitSizeLow(), xenosBase.getUnitSizeHigh());
             returnUnit = new Entity[randomUnitSize];
             for (int i = 0; i < randomUnitSize; i++) {
-                returnUnit[i] = new Xenos();
+                returnUnit[i] = new Xenos(i);
             }
             break;
         default:

@@ -9,7 +9,7 @@ import enemies;
 
 void main()
 {
-    string name;
+    string name = "Player";
     writeln();
     writeln("Welcome to HorizonINC, what type of detective are you?\n" ~
             "Rogue\n" ~
@@ -89,6 +89,11 @@ void main()
             levelTwo = command.split[1];
             player.equipWeapon(levelTwo);
             writeln("You equipped your ", player.getEquippedWeapon().getName());
+            break;
+        case "attack":
+            levelTwo = command.split[1];
+            levelThree = command.split[2];
+            player.attack(levelTwo, levelThree);
             break;
         case "inventory":
             player.printInventory();

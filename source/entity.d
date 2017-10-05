@@ -71,6 +71,7 @@ public:
     Room getLocation() { return this.currentLocation; }
     int getUnitSizeHigh() { return 0; }
     int getUnitSizeLow() { return 0; }
+    int getMemberIndex() { return 0; }
 
     void addWeapon(Weapon newWeapon) {
         weapons.stableInsert(newWeapon);
@@ -99,7 +100,9 @@ public:
         }
     }
 
-    void attack(Entity opponent) {
+    void attack(string opponentStr, string opponentIndex) {
+        Entity opponent = this.currentLocation.getEnemy(opponentStr, opponentIndex);
+        if (opponent is null) { writeln("Err in referencing opponent."); }
         if (!ableToAttack()) {
             return;
         }
@@ -124,10 +127,15 @@ public:
             opponent.destroySelf();
         }
 
-        writeln(this.getName(), " attacks ", opponent.getName(), " with ",
+        writeln(this.getName(), " attacks ", opponent.getName(), " ",
+                opponent.getMemberIndex(), " with ",
                 this.equippedWeapon.getName(), " ",
                 this.equippedWeapon.getNumberOfAttacks(), " time(s) for ",
                 damage, " damage!");
+
+        if (!opponent.isAlive()) {
+            writeln(opponent.getName(), " ", opponent.getMemberIndex(), " is dead.");
+        }
     }
 
     void setLocation(Room location) {
