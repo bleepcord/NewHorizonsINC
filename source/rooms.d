@@ -91,7 +91,9 @@ public:
 
     void listEnemies() {
         foreach (enemy; enemies) {
-            writeln(enemy.getName(), " ", enemy.getMemberIndex());
+            if (enemy.isAlive()) {
+                writeln(enemy.getName(), " ", enemy.getMemberIndex());
+            }
         }
     }
 
