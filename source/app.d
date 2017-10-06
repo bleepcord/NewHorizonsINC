@@ -106,6 +106,10 @@ void main()
         case "observe":
             player.getLocation().observeAdjacentRooms();
             break;
+        case "ammo":
+            writeln(player.getEquippedWeapon().getAmmo(), "/",
+                    player.getEquippedWeapon().getMagSize());
+            break;
         case "quit":
             writeln("Thanks for playing.");
             return;
