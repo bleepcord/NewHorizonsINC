@@ -138,6 +138,17 @@ public:
         }
     }
 
+    void fight(string opponentStr, string opponentIndex) {
+        Entity opponent = this.currentLocation.getEnemy(opponentStr, opponentIndex);
+        bool fighting = true;
+        while (fighting) {
+            attack(opponentStr, opponentIndex);
+            if (!opponent.isAlive()) { fighting = false; }
+            if (!this.isAlive()) { fighting = false; }
+            if (this.equippedWeapon.getAmmo() <= 0) { fighting = false; }
+        }
+    }
+
     void setLocation(Room location) {
         this.currentLocation = location;
     }

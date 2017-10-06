@@ -95,6 +95,11 @@ void main()
             levelThree = command.split[2];
             player.attack(levelTwo, levelThree);
             break;
+        case "fight":
+            levelTwo = command.split[1];
+            levelThree = command.split[2];
+            player.fight(levelTwo, levelThree);
+            break;
         case "inventory":
             player.printInventory();
             break;
