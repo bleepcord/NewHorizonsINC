@@ -105,6 +105,7 @@ void main()
             break;
         case "observe":
             player.getLocation().observeAdjacentRooms();
+            player.getLocation().listEnemies();
             break;
         case "ammo":
             writeln(player.getEquippedWeapon().getAmmo(), "/",
