@@ -102,7 +102,10 @@ public:
 
     void attack(string opponentStr, string opponentIndex) {
         Entity opponent = this.currentLocation.getEnemy(opponentStr, opponentIndex);
-        if (opponent is null) { writeln("Err in referencing opponent."); }
+        if (opponent is null) {
+            writeln("Err in referencing opponent.");
+            return;
+        }
         if (!ableToAttack()) {
             return;
         }
@@ -158,19 +161,26 @@ public:
      */
     void move(string direction) {
 
-        /* If adjacent room does not exist already, create it. */
-        if (this.currentLocation.getAdjacent(direction) is null) {
-            string mapContent = readText("source/map.json");
-            JSONValue map = parseJSON(mapContent);
+        try {
 
-            /* If there is no room in that direction, report back to player and do nothing. */
-            if (map[this.currentLocation.getName()][direction].str == "nothing") {
-                writeln("There is nothing in that direction.");
-                return;
+            /* If adjacent room does not exist already, create it. */
+            if (this.currentLocation.getAdjacent(direction) is null) {
+                string mapContent = readText("source/map.json");
+                JSONValue map = parseJSON(mapContent);
+
+                /* If there is no room in that direction, report back to player and do nothing. */
+                if (map[this.currentLocation.getName()][direction].str == "nothing") {
+                    writeln("There is nothing in that direction.");
+                    return;
+                }
+
+                Room nextLocation = new Room(map[this.currentLocation.getName()][direction].str);
+                this.currentLocation.setAdjacent(nextLocation, direction);
             }
-
-            Room nextLocation = new Room(map[this.currentLocation.getName()][direction].str);
-            this.currentLocation.setAdjacent(nextLocation, direction);
+        }
+        catch (Throwable ex) {
+            writeln("That direction is invalid.");
+            return;
         }
 
         /* Set currentLocation to proper adjacent room. */

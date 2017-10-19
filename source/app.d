@@ -7,6 +7,23 @@ import entity;
 import player;
 import enemies;
 
+
+/* validate number of arguments
+ *
+ * inputLine and required argument count
+ */
+bool validArgs(string inputLine, int rargc)
+{
+    rargc--;
+    if (inputLine.split.length > rargc) {
+        return true;
+    }
+    else {
+        writeln("This command requires at least ", rargc, " arguments");
+        return false;
+    }
+}
+
 void main()
 {
     string name = "Player";
@@ -16,10 +33,12 @@ void main()
             "Fighter\n" ~
             "Psyker\n");
     string command;
-    bool validInput;
+    string lastCommand;
     string playerClass;
+    bool validInput;
 
     /* Read input to set proper playerClass */
+    string levelOne, levelTwo, levelThree;
     do {
         command = stdin.readln();
         playerClass = command.split[0].toLower();
@@ -57,11 +76,11 @@ void main()
      * Some levelOne commands require a levelTwo command, but levelThree
      * commands are NEVER required.
      */
-    string levelOne, levelTwo, levelThree, lastCommand;
     do {
         writeln();
         write("Action: ");
         command = stdin.readln();
+        if (command.length == 1) { continue; }
         /* repeat last command */
         if (cmp(command.strip(), "!!") == 0) {
             command = lastCommand;
@@ -79,6 +98,7 @@ void main()
                     );
             break;
         case "move":
+            if (!validArgs(command, 2)) { break; }
             levelTwo = command.split[1];
             player.move(levelTwo);
             writeln("Location: ", player.getLocation().getName(), "\n",
@@ -86,16 +106,25 @@ void main()
             player.getLocation().listEnemies();
             break;
         case "equip":
+            if (!validArgs(command, 2)) { break; }
             levelTwo = command.split[1];
             player.equipWeapon(levelTwo);
             writeln("You equipped your ", player.getEquippedWeapon().getName());
             break;
         case "attack":
+            if (!validArgs(command, 3)) { break; }
             levelTwo = command.split[1];
             levelThree = command.split[2];
-            player.attack(levelTwo, levelThree);
+            try {
+                player.attack(levelTwo, levelThree);
+            }
+            catch (Throwable ex) {
+                writeln("Unable to attack that enemy. Are you sure that enemy exists?");
+                break;
+            }
             break;
         case "fight":
+            if (!validArgs(command, 3)) { break; }
             levelTwo = command.split[1];
             levelThree = command.split[2];
             player.fight(levelTwo, levelThree);
@@ -119,5 +148,5 @@ void main()
             break;
         }
         lastCommand = command;
-    } while (true); // may be unnecessary
+    } while (true);
 }
