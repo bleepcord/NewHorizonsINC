@@ -143,6 +143,10 @@ public:
 
     void fight(string opponentStr, string opponentIndex) {
         Entity opponent = this.currentLocation.getEnemy(opponentStr, opponentIndex);
+        if (opponent is null) {
+            writeln("Error in referencing opponent.");
+            return;
+        }
         bool fighting = true;
         while (fighting) {
             attack(opponentStr, opponentIndex);
