@@ -37,8 +37,7 @@ abstract class RangedWeapon : Weapon
 {
 private:
     int magSize;
-    int ammo;
-    int getMagazineSize() { return this.magSize; }
+    int ammo = 0;
 protected:
     this(string name, int damageLow, int damageHigh, int numberOfAttacks, int magSize, int ammo)
     {

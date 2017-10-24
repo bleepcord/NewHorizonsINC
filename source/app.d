@@ -127,7 +127,13 @@ void main()
             if (!validArgs(command, 3)) { break; }
             levelTwo = command.split[1];
             levelThree = command.split[2];
-            player.fight(levelTwo, levelThree);
+            try {
+                player.fight(levelTwo, levelThree);
+            }
+            catch (Throwable ex) {
+                writeln("Unable to attack that enemy. Are you sure that enemy exists?");
+                break;
+            }
             break;
         case "inventory":
             player.printInventory();
@@ -137,6 +143,10 @@ void main()
             player.getLocation().listEnemies();
             break;
         case "ammo":
+            if (player.getEquippedWeapon() is null) {
+                writeln("No weapon equipped.");
+                break;
+            }
             writeln(player.getEquippedWeapon().getAmmo(), "/",
                     player.getEquippedWeapon().getMagSize());
             break;
