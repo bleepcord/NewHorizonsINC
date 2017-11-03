@@ -5,8 +5,6 @@ import std.algorithm.comparison : cmp;
 
 import entity;
 import player;
-import enemies;
-
 
 /* validate number of arguments
  *
@@ -157,6 +155,7 @@ void main()
             writeln("Invalid command.");
             break;
         }
+        player.getLocation().enemyTurn();
         lastCommand = command;
     } while (true);
 }

@@ -26,9 +26,18 @@ private:
     int constitution;
     int dexterity;
     bool alive = true;
-    /* SList of weapons in bag of holding */
 
-    auto weapons = SList!Weapon();
+protected:
+    this(string name, int health, int strength, int constitution, int dexterity)
+    {
+        this.name = name;
+        this.health = health;
+        this.strength = strength;
+        this.constitution = constitution;
+        this.dexterity = dexterity;
+    }
+
+    SList!Weapon weapons;
     Weapon equippedWeapon;
     Room currentLocation;
 
@@ -46,19 +55,9 @@ private:
         }
         return true;
     }
-protected:
-    this(string name, int health, int strength, int constitution, int dexterity)
-    {
-        this.name = name;
-        this.health = health;
-        this.strength = strength;
-        this.constitution = constitution;
-        this.dexterity = dexterity;
-    }
-
 public:
     /*
-     * Self expanatory accessors and mutators.
+     * Self explanatory accessors and mutators.
      */
     string getName() { return this.name; }
     int getHealth() { return this.health; }
@@ -117,7 +116,8 @@ public:
             damage = this.equippedWeapon.getDamageHigh();
             damage *= 2;
             writeln("Critical hit!");
-        } else {
+        }
+        else {
             for (int i = 0; i < this.equippedWeapon.getNumberOfAttacks(); i++) {
                 damage += uniform( this.equippedWeapon.getDamageLow(),
                                    this.equippedWeapon.getDamageHigh() );

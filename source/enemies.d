@@ -1,6 +1,10 @@
+import std.stdio;
 import std.random : uniform;
+import std.conv : to;
 
 import entity;
+import rooms;
+import weapons;
 
 /*
  * Base enemy class.
@@ -25,10 +29,65 @@ protected:
         this.unitSizeHigh = unitSizeHigh;
         this.index = index;
     }
+
 public:
     override int getUnitSizeHigh() { return this.unitSizeHigh; }
     override int getUnitSizeLow() { return this.unitSizeLow; }
     override int getMemberIndex() { return this.index; }
+    /* override attack function for enemy implementation
+     * uses different parameters than base class, no override
+     */
+    void attack(Entity playerCharacter) {
+        if (playerCharacter is null) {
+            writeln("Enemy: error in referencing player.");
+            return;
+        }
+        if (!super.ableToAttack()) {
+            return;
+        }
+        int damage;
+        int random;
+
+        random = uniform(0, 21);
+        if (random == 20) {
+            damage = this.equippedWeapon.getDamageHigh();
+            damage *= 2;
+            writeln("Critical hit!");
+        }
+        else {
+            for (int i = 0; i< this.equippedWeapon.getNumberOfAttacks(); i++) {
+                damage += uniform( this.equippedWeapon.getDamageLow(),
+                                   this.equippedWeapon.getDamageHigh() );
+            }
+        }
+        this.equippedWeapon.useAmmo();
+        playerCharacter.decreaseHealth(damage);
+
+        writeln(this.getName(), this.getMemberIndex(), " attacks ",
+                playerCharacter.getName(), " with ",
+                this.equippedWeapon.getName(), " ",
+                this.equippedWeapon.getNumberOfAttacks(), " time(s) for ",
+                damage, " damage!");
+        if (!playerCharacter.isAlive()) {
+            writeln(playerCharacter.getName(), " is dead.");
+        }
+    }
+
+    /* override equip function to equip random weapon
+     * uses different parameters than base class, no override
+     */
+    void equipWeapon() {
+        int listLength = to!int(walkLength(weapons[]));
+        int random = uniform(0, listLength);
+        int i = 0;
+        foreach (weapon; weapons) {
+            if (random == i) {
+                equippedWeapon = weapon;
+                return;
+            }
+            i++;
+        }
+    }
 }
 
 /*
@@ -48,6 +107,8 @@ public:
     this(int index)
     {
         super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh, index);
+        // TODO why the fuck does the add weapon function cause a node w/o payload err
+        super.addWeapon(new Pistol());
     }
 }
 
@@ -93,7 +154,7 @@ private:
     Entity xenosBase = new Xenos(0);
     enum enemyType { REBEL, INFECTED, XENOS }
 public:
-    Entity[] buildUnit(int enemyTypeToBuild) {
+    Entity[] buildUnit(int enemyTypeToBuild, Room location) {
         int randomUnitSize;
         Entity[] returnUnit;
         switch(enemyTypeToBuild) {
@@ -102,6 +163,7 @@ public:
             returnUnit = new Entity[randomUnitSize];
             for (int i = 0; i < randomUnitSize; i++) {
                 returnUnit[i] = new Rebel(i);
+                returnUnit[i].setLocation(location);
             }
             break;
         case this.enemyType.INFECTED:
@@ -109,6 +171,7 @@ public:
             returnUnit = new Entity[randomUnitSize];
             for (int i = 0; i < randomUnitSize; i++) {
                 returnUnit[i] = new Infected(i);
+                returnUnit[i].setLocation(location);
             }
             break;
         case this.enemyType.XENOS:
@@ -116,6 +179,7 @@ public:
             returnUnit = new Entity[randomUnitSize];
             for (int i = 0; i < randomUnitSize; i++) {
                 returnUnit[i] = new Xenos(i);
+                returnUnit[i].setLocation(location);
             }
             break;
         default:

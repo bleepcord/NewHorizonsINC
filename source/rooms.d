@@ -1,5 +1,5 @@
 import std.stdio;
-import std.container : SList;
+import std.container : SList, Array;
 import std.json;
 import std.file : readText;
 import std.conv : to, parse;
@@ -18,11 +18,8 @@ private:
     string description;
     long size;
     long rebelSpawnChance, infectedSpawnChance, xenosSpawnChance;
-    /*
-     * TODO: Populate each room based on probablity of specific entity
-     *       existing in the room.
-     */
-    auto enemies = SList!Entity();
+
+    SList!Entity enemies;
 
     void spawnEnemies() {
         /* boolean vals of whether to spawn unit or not. Randomize these as
@@ -47,7 +44,7 @@ private:
         /* Appears to work properly */
         for (int i = 0; i < spawns.length; i++) {
             if (spawns[i] is true) {
-                enemies.stableInsert(unitBuilder.buildUnit(i));
+                enemies.stableInsert(unitBuilder.buildUnit(i, this));
             }
         }
     }
@@ -59,6 +56,7 @@ private:
      */
     void setEnemyLocations(){
     }
+
 public:
     this(string name)
     {
@@ -167,5 +165,11 @@ public:
             }
         }
         return returnEntity;
+    }
+
+    /* Make all enemies in room take a turn
+     */
+    void enemyTurn(){
+        return;
     }
 }
