@@ -1,6 +1,7 @@
 import std.stdio;
 import std.random : uniform;
 import std.conv : to;
+import std.range : walkLength;
 
 import entity;
 import rooms;
@@ -108,7 +109,7 @@ public:
     {
         super(name, health, strength, constitution, dexterity, unitSizeLow, unitSizeHigh, index);
         // TODO why the fuck does the add weapon function cause a node w/o payload err
-        super.addWeapon(new Pistol());
+        //super.addWeapon(new Pistol());
     }
 }
 
